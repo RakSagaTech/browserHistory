@@ -82,23 +82,29 @@ const initialHistoryList = [
 class BrowserHistory extends Component {
   render() {
     return (
-      <div>
-        <nav>
-          <div>
+      <div className="app-container">
+        <nav className="nav-bar-container">
+          <div className="app-logo-search-input-container">
             <img
               src="https://assets.ccbp.in/frontend/react-js/history-website-logo-img.png"
               alt="app logo"
+              className="app-logo"
             />
-            <div>
+            <div className="search-icon-input-container">
               <img
                 src="https://assets.ccbp.in/frontend/react-js/search-img.png"
                 alt="search"
+                className="search-icon"
               />
-              <input type="search" placeholder="Search history" />
+              <input
+                type="search"
+                placeholder="Search history"
+                className="search-input"
+              />
             </div>
           </div>
         </nav>
-        <ul>
+        <ul className="history-lists">
           {initialHistoryList.map(eachHisotry => (
             <HistoryItem key={eachHisotry.id} historyDetails={eachHisotry} />
           ))}

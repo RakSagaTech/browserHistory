@@ -5,18 +5,23 @@ const HistoryItem = props => {
   const {id, timeAccessed, logoUrl, title, domainUrl} = historyDetails
 
   return (
-    <li>
-      <p>{timeAccessed}</p>
-      <div>
-        <img src={logoUrl} alt="logo" />
-        <div>
-          <p> {title} </p>
-          <p> {domainUrl}</p>
+    <li className="history-item">
+      <p className="time-accessed"> {timeAccessed} </p>
+      <div className="logo-title-domain-delete-container">
+        <div className="logo-title-domain-container">
+          <img src={logoUrl} className="logo" />
+          <div className="title-domain-container">
+            <p className="title"> {title} </p>
+            <p className="domain"> {domainUrl} </p>
+          </div>
         </div>
-        <img
-          src="https://assets.ccbp.in/frontend/react-js/delete-img.png"
-          alt="delete"
-        />
+        <button type="button" className="delete-btn">
+          <img
+            src="https://assets.ccbp.in/frontend/react-js/delete-img.png"
+            alt="delete"
+            className="delete"
+          />
+        </button>
       </div>
     </li>
   )
