@@ -80,7 +80,33 @@ const initialHistoryList = [
 
 // Replace your code here
 class BrowserHistory extends Component {
+  state = {
+    searchInput: '',
+    historyList: initialHistoryList,
+  }
+
+  deleteHistoryItem = id => {
+    const {historyList} = this.state
+    const updatedHistoryList = historyList.filter(
+      eachHistory => eachHistory.id !== id,
+    )
+    this.setState({historyList: updatedHistoryList})
+  }
+
+  onChangeSearchInput = event => {
+    this.setState({searchInput: event.target.value})
+  }
+
+  getFilteredResults = () => {
+    const {searchInput, historyList} = this.state
+    return historyList.filter(eachHistory =>
+      eachHistory.title.toLowerCase().includes(searchInput.toLowerCase()),
+    )
+  }
+
   render() {
+    const {searchInput} = this.state
+    const searchResults = this.getFilteredResults()
     return (
       <div className="app-container">
         <nav className="nav-bar-container">
@@ -100,15 +126,27 @@ class BrowserHistory extends Component {
                 type="search"
                 placeholder="Search history"
                 className="search-input"
+                onChange={this.onChangeSearchInput}
+                value={searchInput}
               />
             </div>
           </div>
         </nav>
-        <ul className="history-lists">
-          {initialHistoryList.map(eachHisotry => (
-            <HistoryItem key={eachHisotry.id} historyDetails={eachHisotry} />
-          ))}
-        </ul>
+        {searchResults.length > 0 ? (
+          <ul className="history-lists">
+            {searchResults.map(eachHistory => (
+              <HistoryItem
+                key={eachHistory.id}
+                historyDetails={eachHistory}
+                deleteHistoryItem={this.deleteHistoryItem}
+              />
+            ))}
+          </ul>
+        ) : (
+          <div className="no-history-container">
+            <p className="no-history"> There is no history to show </p>
+          </div>
+        )}
       </div>
     )
   }

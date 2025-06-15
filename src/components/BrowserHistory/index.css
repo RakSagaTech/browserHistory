@@ -105,3 +105,23 @@
     margin: 40px;
   }
 }
+
+.no-history-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.no-history {
+  color: #475569;
+  font-family: 'Roboto';
+  font-size: 18px;
+}
+
+@media screen and (min-width: 768px) {
+  .no-history {
+    font-size: 24px;
+  }
+}
